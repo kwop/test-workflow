@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\EventSubscriber;
+namespace App\EventSubscriber\Order\ToProcess\Enter;
 
 use App\Service\OrderManager;
 use \Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
 
-class TuneCoreOrderToProcessBlocker implements EventSubscriberInterface
+class TuneCoreBlocker implements EventSubscriberInterface
 {
 
     /**

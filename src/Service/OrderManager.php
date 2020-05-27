@@ -77,5 +77,14 @@ class OrderManager
         ]);
     }
 
+    public function consumeFailedOrder()
+    {
+        $failedOrderList = [];
+        foreach ($failedOrderList as $order) {
+            // async ?
+            $this->waiting($order);
+        }
+    }
+
 }
 

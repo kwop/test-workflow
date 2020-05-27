@@ -72,6 +72,7 @@ framework:
                     to:   done
                     metadata:
                         arrow_color: Turquoise
+
                 error:
                     from: in_progress
                     to:   error

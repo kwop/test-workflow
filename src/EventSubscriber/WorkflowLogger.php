@@ -31,7 +31,7 @@ class WorkflowLogger implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'workflow.blog_publishing.leave' => 'onLeave',
+            'workflow.order.leave' => 'onLeave',
         ];
     }
 }

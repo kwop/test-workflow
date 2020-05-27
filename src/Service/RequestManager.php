@@ -66,5 +66,14 @@ class RequestManager
             'log_comment' => sprintf('request processing error %s', $exception->getMessage()),
         ]);
     }
+
+    public function consumeFailedRequest()
+    {
+        $failedRequestList = [];
+        foreach ($failedRequestList as $request) {
+            // async ?
+            $this->new($request);
+        }
+    }
 }
 

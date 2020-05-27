@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\EventSubscriber;
+namespace App\EventSubscriber\Order\Done\Enter;
 
 use Doctrine\ORM\EntityManagerInterface;
 use \Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
 
 
-class TuneCoreOrderDoneBlocker implements EventSubscriberInterface
+class TuneCoreBlocker implements EventSubscriberInterface
 {
 
     /**
@@ -40,7 +40,7 @@ class TuneCoreOrderDoneBlocker implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'workflow.order.to_process.enter' => 'beforeDone',
+            'workflow.order.done.enter' => 'beforeDone',
         ];
     }
 }
