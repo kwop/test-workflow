@@ -23,5 +23,13 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Service\OrderManager:
+        arguments:
+            $stateMachine: "state_machine.order"
+
+    App\Service\RequestManager:
+        arguments:
+            $stateMachine: "state_machine.request"
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

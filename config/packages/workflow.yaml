@@ -1,0 +1,84 @@
+framework:
+    workflows:
+        order:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Order
+            initial_marking: waiting
+            places:
+                waiting:
+                    metadata:
+                        bg_color: green
+                to_process:
+                    metadata:
+                        bg_color: green
+                done:
+                    metadata:
+                        bg_color: green
+                error:
+                    metadata:
+                        bg_color: red
+            transitions:
+                to_process:
+                    from: waiting
+                    to:   to_process
+                done:
+                    from: to_process
+                    to:   done
+                error:
+                    from: to_process
+                    to:   error
+                    metadata:
+                        arrow_color: red
+                retry:
+                    from: error
+                    to:   to_process
+                    metadata:
+                        arrow_color: red
+        request:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Request
+            initial_marking: new
+            places:
+                new:
+                    metadata:
+                        bg_color: green
+                in_progress:
+                    metadata:
+                        bg_color: green
+                done:
+                    metadata:
+                        bg_color: green
+                error:
+                    metadata:
+                        bg_color: red
+            transitions:
+                in_progress:
+                    from:  new
+                    to:   in_progress
+                done:
+                    from: in_progress
+                    to:   done
+                    metadata:
+                        arrow_color: Turquoise
+                error:
+                    from: in_progress
+                    to:   error
+                    metadata:
+                        arrow_color: red
+                retry:
+                    from: error
+                    to:   in_progress
+                    metadata:
+                        arrow_color: red
