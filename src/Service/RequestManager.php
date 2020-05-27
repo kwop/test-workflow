@@ -47,6 +47,12 @@ class RequestManager
             $this->stateMachine->apply($request, 'in_progress', [
                 'log_comment' => 'Processing request',
             ]);
+
+            // traitement
+            // done peut aussi etre trigger depuis les events
+
+            $this->done($request);
+
         } catch (\Exception $exception) {
             $this->error($request, $exception);
         }

@@ -1,5 +1,41 @@
 framework:
     workflows:
+        input:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Input
+            initial_marking: to_process
+            places:
+                to_process:
+                    metadata:
+                        bg_color: green
+                done:
+                    metadata:
+                        bg_color: green
+                error:
+                    metadata:
+                        bg_color: red
+            transitions:
+                done:
+                    from: to_process
+                    to:   done
+                    metadata:
+                        arrow_color: Turquoise
+                error:
+                    from: to_process
+                    to:   error
+                    metadata:
+                        arrow_color: red
+                retry:
+                    from: error
+                    to:   to_process
+                    metadata:
+                        arrow_color: red
         order:
             type: 'state_machine'
             audit_trail:
@@ -49,6 +85,49 @@ framework:
                 property: 'state'
             supports:
                 - App\Entity\Request
+            initial_marking: new
+            places:
+                new:
+                    metadata:
+                        bg_color: green
+                in_progress:
+                    metadata:
+                        bg_color: green
+                done:
+                    metadata:
+                        bg_color: green
+                error:
+                    metadata:
+                        bg_color: red
+            transitions:
+                in_progress:
+                    from:  new
+                    to:   in_progress
+                done:
+                    from: in_progress
+                    to:   done
+                    metadata:
+                        arrow_color: Turquoise
+
+                error:
+                    from: in_progress
+                    to:   error
+                    metadata:
+                        arrow_color: red
+                retry:
+                    from: error
+                    to:   new
+                    metadata:
+                        arrow_color: red
+        notification:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Notification
             initial_marking: new
             places:
                 new:

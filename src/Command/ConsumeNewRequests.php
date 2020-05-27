@@ -8,7 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateRequestDelivery extends Command
+class ConsumeNewRequests extends Command
 {
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:generate-request-delivery';
@@ -16,7 +16,6 @@ class GenerateRequestDelivery extends Command
      * @var RequestManager
      */
     private $requestManager;
-
 
 
     public function __construct(RequestManager $requestManager)
@@ -35,7 +34,7 @@ class GenerateRequestDelivery extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->requestManager->consumeNewRequest();
+        $this->requestManager->consumeNewRequests();
 
         return 0;
     }

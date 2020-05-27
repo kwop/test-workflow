@@ -4,23 +4,26 @@
 namespace App\Command;
 
 
-use App\Service\OrderManager;
+use App\Service\NotificationManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UpdateOrderStatusDelivery extends Command
+class ConsumeNewNotifications extends Command
 {
     // the name of the command (the part after "bin/console")
-    protected static $defaultName = 'app:update-order-status-delivery';
+    protected static $defaultName = 'app:consume-new-notifications';
+    /**
+     * @var NotificationManager
+     */
+    private $notificationManager;
 
-    private $orderManager;
 
-    public function __construct(OrderManager $orderManager)
+    public function __construct(NotificationManager $notificationManager)
     {
-        $this->orderManager = $orderManager;
 
         parent::__construct();
+        $this->notificationManager = $notificationManager;
     }
 
     protected function configure()
@@ -33,12 +36,7 @@ class UpdateOrderStatusDelivery extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $orderList = [];
-
-        foreach ($orderList as $order){
-            // async ?
-            $this->orderManager->done($order);
-        }
+        $this->notificationManager->consumeNewNotifications();
 
         return 0;
     }

@@ -26,7 +26,7 @@ class OrderManager
         $this->em = $em;
     }
 
-    public function consumeWaitingOrder()
+    public function consumeWaitingOrders()
     {
         $orderList = [];
 
@@ -53,6 +53,10 @@ class OrderManager
                 'log_comment' => 'Processing offer',
             ]);
 
+            // traitement
+            // done peut aussi etre trigger depuis les events
+
+            $this->done($order);
 
         } catch (\Exception $exception) {
             $this->error($order, $exception);
