@@ -32,7 +32,7 @@ class OrderManager
 
         foreach ($orderList as $order) {
             // async ?
-            $this->waiting($order);
+            $this->toProcess($order);
         }
 
     }
