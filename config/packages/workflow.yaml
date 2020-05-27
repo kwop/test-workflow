@@ -37,7 +37,7 @@ framework:
                         arrow_color: red
                 retry:
                     from: error
-                    to:   to_process
+                    to:   waiting
                     metadata:
                         arrow_color: red
         request:
@@ -80,6 +80,6 @@ framework:
                         arrow_color: red
                 retry:
                     from: error
-                    to:   in_progress
+                    to:   new
                     metadata:
                         arrow_color: red
